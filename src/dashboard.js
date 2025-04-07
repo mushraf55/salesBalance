@@ -42,7 +42,7 @@ const Dashboard = ({ setIsAuthenticated }) => {
 
   const fetchAvailableStock = async () => {
     try {
-      const response = await fetch("http://localhost:7500/api/products", {
+      const response = await fetch("https://salesbalancebackend.onrender.com/api/products", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -63,7 +63,7 @@ const Dashboard = ({ setIsAuthenticated }) => {
 
   const fetchSoldProducts = async () => {
     try {
-      const response = await fetch("http://localhost:7500/api/sales", {
+      const response = await fetch("https://salesbalancebackend.onrender.com/api/sales", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -105,7 +105,7 @@ const Dashboard = ({ setIsAuthenticated }) => {
 
   const handleAddProduct = async () => {
     try {
-      const response = await fetch("http://localhost:7500/api/products", {
+      const response = await fetch("https://salesbalancebackend.onrender.com/api/products", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -163,7 +163,7 @@ const Dashboard = ({ setIsAuthenticated }) => {
       }
   
       // Only call the /sell endpoint — no PATCH to product!
-      const saleResponse = await fetch("http://localhost:7500/api/sales/sell", {
+      const saleResponse = await fetch("https://salesbalancebackend.onrender.com/api/sales/sell", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
