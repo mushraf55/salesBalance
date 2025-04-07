@@ -1,11 +1,9 @@
-// src/App.js
-import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
-import Dashboard from "./dashboard"; // Keep Dashboard as a separate file
-import "./App.css";
+import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 
-function Login({ setIsAuthenticated }) {
-  const navigate = useNavigate();
+
+const Login = () => {
+    const navigate = useNavigate(); // Initialize the navigate hook
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -15,7 +13,7 @@ function Login({ setIsAuthenticated }) {
     setError("");
 
     try {
-      const response = await fetch("https://salesbalancebackend.onrender.com/api/auth/login", {
+      const response = await fetch("http://localhost:7500/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -27,12 +25,15 @@ function Login({ setIsAuthenticated }) {
       }
 
       const data = await response.json();
+
+      // Store token and user info in localStorage
       localStorage.setItem("token", data.token);
       localStorage.setItem("name", data.name);
       localStorage.setItem("role", data.role);
 
-      setIsAuthenticated(true);
-      navigate("/dashboard");
+      // Redirect to main dashboard
+    navigate("/dashboard"); 
+      
     } catch (err) {
       console.error("Login error:", err.message);
       setError(err.message || "Something went wrong. Try again later.");
@@ -66,36 +67,6 @@ function Login({ setIsAuthenticated }) {
       </div>
     </div>
   );
-}
+};
 
-function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) setIsAuthenticated(true);
-  }, []);
-
-  return (
-    <Router>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            isAuthenticated ? (
-              <Dashboard setIsAuthenticated={setIsAuthenticated} />
-            ) : (
-              <Login setIsAuthenticated={setIsAuthenticated} />
-            )
-          }
-        />
-        <Route
-          path="/dashboard"
-          element={<Dashboard setIsAuthenticated={setIsAuthenticated} />}
-        />
-      </Routes>
-    </Router>
-  );
-}
-
-export default App;
+export default Login;
