@@ -47,7 +47,7 @@ const ServiceReportInput = () => {
    useEffect(() => {
     const fetchReportNo = async () => {
       try {
-        const res = await axios.get("http://localhost:7500/api/reportNumber/generate-report-no");
+        const res = await axios.get("https://salesbalancebackend.onrender.com/api/reportNumber/generate-report-no");
         setFormData((prev) => ({
           ...prev,
           reportNo: res.data.reportNo,
