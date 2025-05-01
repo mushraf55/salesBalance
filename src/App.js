@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Login from './login';
 import Dashboard from './dashboard';
+import ServiceReport from './serviceReport'; 
+import ServiceReportInput from './ServiceReportInput';
+import Signature from "./signatureCanvas"
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -20,7 +23,9 @@ function App() {
           path="/"
           element={
             isAuthenticated ? (
-              <Dashboard setIsAuthenticated={setIsAuthenticated} />
+              <>
+                <Dashboard setIsAuthenticated={setIsAuthenticated} />
+              </>
             ) : (
               <Login setIsAuthenticated={setIsAuthenticated} />
             )
@@ -30,6 +35,19 @@ function App() {
           path="/dashboard"
           element={<Dashboard setIsAuthenticated={setIsAuthenticated} />}
         />
+        <Route
+          path="/serviceReport"
+          element={<ServiceReport setIsAuthenticated={setIsAuthenticated} />}
+        />
+        <Route
+          path="/serviceInput"
+          element={<ServiceReportInput setIsAuthenticated={setIsAuthenticated} />}
+        />
+        <Route
+          path="/signature"
+          element={<Signature setIsAuthenticated={setIsAuthenticated} />}
+        />
+        
       </Routes>
     </div>
   );
