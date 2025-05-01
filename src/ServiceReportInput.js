@@ -110,6 +110,7 @@ const ServiceReportInput = () => {
 
   // Handle touch events for mobile
   const handleTouchStart = (e) => {
+    e.preventDefault();
     const canvas = canvasRef.current;
     const ctx = ctxRef.current;
     if (ctx) {
@@ -124,6 +125,7 @@ const ServiceReportInput = () => {
   };
 
   const handleTouchMove = (e) => {
+    e.preventDefault();
     const canvas = canvasRef.current;
     const ctx = ctxRef.current;
     if (ctx) {
@@ -135,7 +137,8 @@ const ServiceReportInput = () => {
     }
   };
 
-  const handleTouchEnd = () => {
+  const handleTouchEnd = (e) => {
+    e.preventDefault();
     const canvas = canvasRef.current;
     canvas.removeEventListener("touchmove", handleTouchMove);
     canvas.removeEventListener("touchend", handleTouchEnd);
@@ -345,7 +348,7 @@ const ServiceReportInput = () => {
           <input
             className="form-control"
             name="serialNo"
-            placeholder="Enter Serial N0."
+            placeholder="Enter Serial No."
             onChange={handleChange}
           />
         </div>
@@ -853,6 +856,7 @@ const ServiceReportInput = () => {
             onMouseDown={handleMouseDown}
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
+            style={{ touchAction: "none" }}
           ></canvas>
           <div className="mt-2">
             <button
